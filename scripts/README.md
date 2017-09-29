@@ -21,4 +21,4 @@ If a TFR in the archived list has shapefiles posted at a later time, the script 
 
 If after a week of scrapes, an archived TFR has not had shapefiles uploaded, the script will strip it from the list of archived TFRs. (I assume by that point the FAA will not be posting shapefiles at all.)
 
-**Note:** The shell script is written to be run on an EC2 instance, so modifications to directory paths will be necessary for other environments.
+**Note:** The shell script is written to be run on an EC2 instance, so modifications to directory paths will be necessary for other environments. The `date` commands vary across operating systems as well. The script was written to work in Linux, and my tests show the date commands required to remove old "archived" TFRs throw non-fatal errors. Slight modifications may then be needed.
