@@ -1,0 +1,1 @@
+This directory is used to store the files that include a TFRs coordinates and affected altitudes.
