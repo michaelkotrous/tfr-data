@@ -20,3 +20,5 @@ The Shell script takes in the list of new TFRs output by the R script in order t
 If a TFR in the archived list has shapefiles posted at a later time, the script will unpack the zip archive just as it would for any other TFR.
 
 If after a week of scrapes, an archived TFR has not had shapefiles uploaded, the script will strip it from the list of archived TFRs. (I assume by that point the FAA will not be posting shapefiles at all.)
+
+**Note:** The shell script is written to be run on an EC2 instance, so modifications to directory paths will be necessary for other environments.

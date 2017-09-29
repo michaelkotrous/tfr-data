@@ -1,9 +1,8 @@
 .DS_Store
-s3-export
 shapefiles/*
 !shapefiles/README.md
-R
 newTFRids-archive.csv
 newTFRids-export.csv
 FAA-TFR-scraper.Rout
-
+.RData
+tfrData-export-memory.csv

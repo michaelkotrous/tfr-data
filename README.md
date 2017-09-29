@@ -34,5 +34,7 @@ If you do not have an AWS account currently, you can sign up and run an EC2 inst
 ### Why do I need the Shell script?
 The FAA posts shapefiles for most TFRs that contain valuable information about the landarea and altitudes affected that R's XML package cannot scrape.
 
-Running the shell script after the R script will loop over the URLs where each active TFRs shapefiles are stored and download them using `wget`. The script in this repo places the shapefiles into directory `/tmp/` and then unpackage the archives in a specified directory. This script is written to be run on an EC2 instance, so modifications will be necessary for other environments.
+Running the shell script after the R script will loop over the URLs where each active TFRs shapefiles are stored and download them using `wget`. The script in this repo places the shapefiles into directory `/tmp/` and then unpackage the archives in a specified directory. 
+
+**Note:** The shell script is written to be run on an EC2 instance, so modifications to directory paths will be necessary for other environments.
 
