@@ -7,9 +7,9 @@ The FAA lists its active TFRs [online](http://tfr.faa.gov/tfr2/list.jsp). Unfort
 You are free to copy and modify this code as you see fit to collect your own TFR data. If you find a way to improve the dataset, then please submit a pull request!
 
 ## Dependencies
-* `R`,
+* `R` ([download](https://cran.r-project.org/)),
 * R's `XML` package,
-* `wget`, and
+* `wget`(Install with [Homebrew](http://formulae.brew.sh/formula/wget)), and
 * `sed`.
 
 ## Running the Scripts
