@@ -1,2 +1,2 @@
 # TFR Data Demo
-This is an example of the dataset that compiled TFRs issued between Sept. 20 and 29, 2017.
+This is an example of the dataset that compiled TFRs issued between Sept. 20 and 29, 2017. Notice that the landarea column is empty. That column will need to filled by a process that takes the data from the shapefiles and estimates the landarea affected by a TFR. This is an open problem that I will post a solution to as soon as I've worked it out.
