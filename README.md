@@ -31,7 +31,7 @@ I'll write up a blog post on how I set this up at a later date, but this [AWS bl
 
 If you do not have an AWS account currently, you can sign up and run an EC2 instance under the "free tier" for 12 months. You can collect TFR data for a year free of charge!
 
-## Why do I need the Shell script?
+### Why do I need the Shell script?
 The FAA posts shapefiles for most TFRs that contain valuable information about the landarea and altitudes affected that R's XML package cannot scrape.
 
 Running the shell script after the R script will loop over the URLs where each active TFRs shapefiles are stored and download them using `wget`. The script in this repo places the shapefiles into directory `/tmp/` and then unpackage the archives in a specified directory. This script is written to be run on an EC2 instance, so modifications will be necessary for other environments.
