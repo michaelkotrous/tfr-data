@@ -1,0 +1,8 @@
+.DS_Store
+s3-export
+shapefiles/*
+R
+newTFRids-archive.csv
+newTFRids-export.csv
+FAA-TFR-scraper.Rout
+
