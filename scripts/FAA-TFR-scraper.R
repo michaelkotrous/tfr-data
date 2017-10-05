@@ -1,6 +1,7 @@
 # Load Dependencies
 ## See XML package documentation https://cran.r-project.org/web/packages/XML/XML.pdf
 library(XML)
+library(httr)
 
 # Set working directory
 setwd("")
@@ -54,36 +55,39 @@ i <- 1
 
 for(notam in as.factor(tfrNotam)) {
     xmlUrl <- paste(xml_prefix, notam, xml_suffix, sep="")
-    notamXML <- xmlParse(xmlUrl)
+    
+    if(GET(xmlUrl)$status == 200) {
+        notamXML <- xmlParse(xmlUrl)
 
-    ## Global identifier
-    guid <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/NotUid/codeGUID", xmlValue)
+        ## Global identifier
+        guid <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/NotUid/codeGUID", xmlValue)
 
-    ## Date values
-    dateIssued <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/NotUid/dateIssued", xmlValue)
-    dateEffective <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/dateEffective", xmlValue)
-    dateExpire <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/dateExpire", xmlValue)
-    codeTimeZone <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/codeTimeZone", xmlValue)
+        ## Date values
+        dateIssued <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/NotUid/dateIssued", xmlValue)
+        dateEffective <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/dateEffective", xmlValue)
+        dateExpire <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/dateExpire", xmlValue)
+        codeTimeZone <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/codeTimeZone", xmlValue)
 
-    ## Location values
-    city <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/AffLocGroup/txtNameCity", xmlValue)
+        ## Location values
+        city <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/AffLocGroup/txtNameCity", xmlValue)
 
-    ## Text description values
-    codeType <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/TfrNot/codeType", xmlValue)
-    purpose <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/txtDescrPurpose", xmlValue)
-    notamFull <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/txtDescrUSNS", xmlValue)
+        ## Text description values
+        codeType <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/TfrNot/codeType", xmlValue)
+        purpose <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/txtDescrPurpose", xmlValue)
+        notamFull <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/txtDescrUSNS", xmlValue)
 
-    ## Append data to the relevant row
-    if (length(dateIssued) > 0 ) { tfrData$date_issued[i] <- dateIssued }
-    if (length(dateEffective) > 0 ) { tfrData$date_effective[i] <- dateEffective }
-    if (length(dateExpire) > 0 ) { tfrData$date_expire[i] <- dateExpire }
-    if (length(codeTimeZone) > 0 ) { tfrData$code_timezone[i] <- codeTimeZone }
-    if (length(city) > 0 ) { tfrData$city[i] <- city }
-    if (length(codeType) > 0 ) { tfrData$code_type[i] <- codeType }
-    if (length(purpose) > 0) { tfrData$purpose[i] <- purpose }
-    if (length(notamFull) > 0 ) { tfrData$notam_fulltext[i] <- notamFull }
-    if (length(guid) > 0 ) { tfrData$guid[i] <- guid }
-
+        ## Append data to the relevant row
+        if (length(dateIssued) > 0 ) { tfrData$date_issued[i] <- dateIssued }
+        if (length(dateEffective) > 0 ) { tfrData$date_effective[i] <- dateEffective }
+        if (length(dateExpire) > 0 ) { tfrData$date_expire[i] <- dateExpire }
+        if (length(codeTimeZone) > 0 ) { tfrData$code_timezone[i] <- codeTimeZone }
+        if (length(city) > 0 ) { tfrData$city[i] <- city }
+        if (length(codeType) > 0 ) { tfrData$code_type[i] <- codeType }
+        if (length(purpose) > 0) { tfrData$purpose[i] <- purpose }
+        if (length(notamFull) > 0 ) { tfrData$notam_fulltext[i] <- notamFull }
+        if (length(guid) > 0 ) { tfrData$guid[i] <- guid }
+    }
+    
     i <- i + 1 
 }
 
