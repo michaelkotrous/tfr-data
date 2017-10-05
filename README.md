@@ -9,7 +9,8 @@ You are free to copy and modify this code as you see fit to collect your own TFR
 ## Dependencies
 * `R` ([download](https://cran.r-project.org/)),
 * R's `XML` package,
-* `wget`(Install with [Homebrew](http://formulae.brew.sh/formula/wget)), and
+* R's `httr` package ([GitHub](https://github.com/r-lib/httr)),
+* `wget`(Install with [Homebrew](http://formulae.brew.sh/formula/wget) if running on Mac OS), and
 * `sed`.
 
 ## Running the Scripts
