@@ -100,6 +100,9 @@ tfrData$notam_fulltext <- gsub("\n", " ", tfrData$notam_fulltext)
 # Reorder columns to be logical
 tfrData <- tfrData[,c(15,1,6,16,4,12,2,11,3,17,10,7,8,9,5,13,14)]
 
+# Remove rows that do not have detailed XML page (i.e., no guid)
+tfrData <- subset(tfrData, !is.na(as.factor(tfrData$guid)))
+
 # Pull in latest version of dataset
 tfrDataMemory <- read.table("tfrData-export-memory.csv", sep=",", header=T, na.strings="")
 
