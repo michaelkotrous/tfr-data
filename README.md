@@ -28,7 +28,7 @@ These scripts are designed to be run automatically with no need to oversee their
 0 * * * * R CMD BATCH /home/ec2-user/scripts/FAA-TFR-scraper.R && /home/ec2-user/scripts/shapefile-download.sh
 ```
 
-I'll write up a blog post on how I set this up at a later date, but this [AWS blog post](https://aws.amazon.com/blogs/big-data/running-r-on-aws/) on how to run R on an EC2 instance was very helpful for me as I got started.
+I wrote a [blog post](http://www.michaelkotro.us/posts/web-scraping-with-r-amazon-web-services-7eb5e27) outlining the process of setting up an EC2 instance to execute the web scrapes and store your data in an S3 bucket.
 
 If you do not have an AWS account currently, you can sign up and run an EC2 instance under the "free tier" for 12 months. You can collect TFR data for a year free of charge!
 
