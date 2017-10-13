@@ -1,5 +1,7 @@
 # FAA TFR Data
-The code in this project compiles a dataset of temporary flight restrictions issued by the FAA and their corresponding shapefiles. The code is written so that the webscraping tool and the Shell script can be run on an AWS EC2 Linux instance, so you may need to fork in order to tweak the code to meet your needs. I wrote a [blog post](http://www.michaelkotro.us/posts/web-scraping-with-r-amazon-web-services-7eb5e27) outlining the process of setting up an EC2 instance with R to run these scripts.
+The code in this project compiles a dataset of temporary flight restrictions issued by the FAA and their corresponding shapefiles.
+
+The scripts are written to run on an AWS EC2 Linux instance, so you may need to fork in order to tweak according to your operating system or production environment. I wrote a [blog post](http://www.michaelkotro.us/posts/web-scraping-with-r-amazon-web-services-7eb5e27) outlining the process of setting up an EC2 instance with R to run these scripts.
 
 The FAA lists its active TFRs [online](http://tfr.faa.gov/tfr2/list.jsp). Unfortunately no online repository exists for expired TFRs, stymieing analysis of temporary flight restrictions. The data on active TFRs are conveniently formatted in HTML tables, making the data conducive to using the `readHTMLTable` function provided by R's XML package.
 
