@@ -41,3 +41,7 @@ Running the shell script after the R script will loop over the URLs where each a
 
 **Note:** The shell script is written to be run on an EC2 instance, so modifications to directory paths will be necessary for other environments.
 
+## Load the Data into R
+```r
+tfrData <- read.table("path/to/tfrData-export-memory.csv", head=T, sep=",", na.strings = "")
+```
