@@ -15,9 +15,12 @@ You are free to copy and modify this code as you see fit to collect your own TFR
 * `wget`(Install with [Homebrew](http://formulae.brew.sh/formula/wget) if running on Mac OS), and
 * `sed`.
 
-## Running the Scripts
-For the first collection of TFR data, you'll need to place `tfrData-export-memory-head.csv` into the working directory specified by the R script and rename the file to `tfrData-export-memory.csv`. 
+## Preparing the Scripts and Files to Avoid Errors
+1. The shell script `shapefile-download.sh` is written specifically to run on an EC2 instance, so directory paths (i.e., `/home/ec2-user/...`) may need to be modified to match the working directory in your production environment.
+2. Edit line 7 of `FAA-TFR-scrapper.R` to set the working directory to match the path to your installation of the `tfr-data` repo.
+3. For the first collection of TFR data, you'll need to copy `tfrData-export-memory-head.csv` to a new file named `tfrData-export-memory.csv` in the working directory. Additional scrapes will append new TFRs as rows to the end of the file, so you won't want to overwrite it!
 
+## Running the Scripts
 The scripts can be run manually to compile the active list of TFRs, download their shapefiles, and append them to the records collected in your dataset thus far.
 
 ```bash
@@ -30,16 +33,12 @@ These scripts are designed to be run automatically with no need to oversee their
 0 * * * * R CMD BATCH /home/ec2-user/scripts/FAA-TFR-scraper.R && /home/ec2-user/scripts/shapefile-download.sh
 ```
 
-I wrote a [blog post](http://www.michaelkotro.us/posts/web-scraping-with-r-amazon-web-services-7eb5e27) outlining the process of setting up an EC2 instance to execute the web scrapes and store your data in an S3 bucket.
-
-If you do not have an AWS account currently, you can sign up and run an EC2 instance under the "free tier" for 12 months. You can collect TFR data for a year free of charge!
+I wrote a [blog post](http://www.michaelkotro.us/posts/web-scraping-with-r-amazon-web-services-7eb5e27) outlining the process of setting up an EC2 instance to execute the web scrapes and store your data in an S3 bucket. If you do not have an AWS account currently, you can sign up and run an EC2 instance under the "free tier" for 12 months. You can collect TFR data for a year free of charge!
 
 ### Why do I need the Shell script?
 The FAA posts shapefiles for most TFRs that contain valuable information about the landarea and altitudes affected that R's XML package cannot scrape.
 
-Running the shell script after the R script will loop over the URLs where each active TFRs shapefiles are stored and download them using `wget`. The script in this repo places the shapefiles into directory `/tmp/` and then unpackage the archives in a specified directory. 
-
-**Note:** The shell script is written to be run on an EC2 instance, so modifications to directory paths will be necessary for other environments.
+Running the shell script after the R script will loop over the URLs where each active TFRs shapefiles are stored and download them using `wget`. The script in this repo places the shapefiles into directory `/tmp/` and then unpackage the archives in a specified directory.
 
 ## Load the Data into R
 ```r
