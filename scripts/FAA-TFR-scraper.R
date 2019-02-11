@@ -5,7 +5,7 @@ library(RCurl)
 library(httr)
 
 # Set working directory
-setwd("")
+setwd("/home/ec2-user")
 
 url <- "https://tfr.faa.gov/tfr2/list.html"
 xdata <- getURL(url)
@@ -107,7 +107,7 @@ tfrData <- tfrData[,c(15,1,6,16,4,12,2,11,3,17,10,7,8,9,5,13,14)]
 tfrData <- subset(tfrData, !is.na(as.factor(tfrData$guid)))
 
 # Pull in latest version of dataset
-tfrDataMemory <- read.table("tfrData-export-memory.csv", sep=",", header=T, na.strings="")
+tfrDataMemory <- read.table("s3-export/tfrData-export-memory.csv", sep=",", header=T, na.strings="")
 
 # Loop over working data to see if any TFRs in memory have expired after most recent update
 i <- 1
@@ -128,7 +128,7 @@ if (nrow(tfrDataMemory) >= 1) {
 
     ## Write updated tfrDataMemory data frame to overwrite csv data file of TFR data in memory
     ## Note: Overwriting data in memory won't affect process of appending new TFRs below
-    write.table(tfrDataMemory, file = "tfrData-export-memory.csv", append = FALSE, quote = TRUE, sep = ",", eol = "\n", na = "", dec = ".", row.names = FALSE, col.names = TRUE, qmethod = c("escape", "double"), fileEncoding = "utf8")
+    write.table(tfrDataMemory, file = "s3-export/tfrData-export-memory.csv", append = FALSE, quote = TRUE, sep = ",", eol = "\n", na = "", dec = ".", row.names = FALSE, col.names = TRUE, qmethod = c("escape", "double"), fileEncoding = "utf8")
 }
 
 # Loop over working data and compare Globally Unique Identifiers of each TFR to those in memory
@@ -153,4 +153,4 @@ newTFRids <- subset(tfrDataNew, select=c(guid,notam))
 write.table(newTFRids, file = "newTFRids-export.csv", append = FALSE, quote = TRUE, sep = ",", eol = "\n", na = "", dec = ".", row.names = FALSE, col.names = FALSE, qmethod = c("escape", "double"), fileEncoding = "utf8")
 
 # Append new TFR data to dataset in memory
-write.table(tfrDataNew, file = "tfrData-export-memory.csv", append = TRUE, quote = TRUE, sep = ",", eol = "\n", na = "", dec = ".", row.names = FALSE, col.names = FALSE, qmethod = c("escape", "double"), fileEncoding = "utf8")
+write.table(tfrDataNew, file = "s3-export/tfrData-export-memory.csv", append = TRUE, quote = TRUE, sep = ",", eol = "\n", na = "", dec = ".", row.names = FALSE, col.names = FALSE, qmethod = c("escape", "double"), fileEncoding = "utf8")

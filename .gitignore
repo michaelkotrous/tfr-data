@@ -1,8 +1,10 @@
-.DS_Store
+.*
+!.gitignore
 shapefiles/*
 !shapefiles/README.md
 newTFRids-archive.csv
 newTFRids-export.csv
 FAA-TFR-scraper.Rout
-.RData
+s3-export
+R
 tfrData-export-memory.csv

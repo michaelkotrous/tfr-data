@@ -11,13 +11,14 @@ You are free to copy and modify this code as you see fit to collect your own TFR
 ## Dependencies
 * `R` ([download](https://cran.r-project.org/)),
 * R's `XML` package ([R Documentation](https://cran.r-project.org/package=XML)),
+* R's `RCurl` package ([R Documentation](https://cran.r-project.org/web/packages/RCurl/index.html))
 * R's `httr` package ([GitHub](https://github.com/r-lib/httr)),
 * `wget`(Install with [Homebrew](http://formulae.brew.sh/formula/wget) if running on Mac OS), and
 * `sed`.
 
 ## Preparing the Scripts and Files to Avoid Errors
 1. The shell script `shapefile-download.sh` is written specifically to run on an EC2 instance, so directory paths (i.e., `/home/ec2-user/...`) may need to be modified to match the working directory in your production environment.
-2. Edit line 7 of `FAA-TFR-scrapper.R` to set the working directory to match the path to your installation of the `tfr-data` repo.
+2. Edit line 8 of `FAA-TFR-scrapper.R` to set the working directory to match the path to your installation of the `tfr-data` repo. Paths may need to be edited on lines 110, 131, and 156 of that file.
 3. For the first collection of TFR data, you'll need to copy `tfrData-export-memory-head.csv` to a new file named `tfrData-export-memory.csv` in the working directory. Additional scrapes will append new TFRs as rows to the end of the file, so you won't want to overwrite it!
 
 ## Running the Scripts
