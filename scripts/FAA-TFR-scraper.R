@@ -55,7 +55,7 @@ i <- 1
 
 for(notam in as.factor(tfrNotam)) {
     xmlUrl <- paste(xml_prefix, notam, xml_suffix, sep="")
-    
+
     if(GET(xmlUrl)$status == 200) {
         notamXML <- xmlParse(xmlUrl)
 
@@ -87,8 +87,8 @@ for(notam in as.factor(tfrNotam)) {
         if (length(notamFull) > 0 ) { tfrData$notam_fulltext[i] <- notamFull }
         if (length(guid) > 0 ) { tfrData$guid[i] <- guid }
     }
-    
-    i <- i + 1 
+
+    i <- i + 1
 }
 
 # Clean data obtained from detail XML page to avoid formatting issues
@@ -139,7 +139,7 @@ for (i in seq(1, nrow(tfrData), by=1)) {
         l <- length(newTFRs)
         newTFRs[l+1] <- newGuid
     }
-    
+
     i <- i + 1
 }
 
