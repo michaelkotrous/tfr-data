@@ -1,13 +1,15 @@
 # Load Dependencies
 ## See XML package documentation https://cran.r-project.org/web/packages/XML/XML.pdf
 library(XML)
+library(RCurl)
 library(httr)
 
 # Set working directory
 setwd("")
 
-url <- "http://tfr.faa.gov/tfr2/list.jsp"
-tables <- readHTMLTable(url)
+url <- "https://tfr.faa.gov/tfr2/list.html"
+xdata <- getURL(url)
+tables <- readHTMLTable(xdata)
 tfrTable <- tables[[5]]
 
 # Clean up raw table
@@ -34,7 +36,7 @@ tfrData$timestamp <- timestamp
 # Next steps are to loop over NOTAM ids to fetch detailed xml and add detailed TFR data
 tfrNotam <- c(as.character(tfrData$notam))
 
-xml_prefix <- "http://tfr.faa.gov/save_pages/detail_"
+xml_prefix <- "https://tfr.faa.gov/save_pages/detail_"
 xml_suffix <- ".xml"
 
 # Generate new columns in data frame
@@ -57,7 +59,8 @@ for(notam in as.factor(tfrNotam)) {
     xmlUrl <- paste(xml_prefix, notam, xml_suffix, sep="")
 
     if(GET(xmlUrl)$status == 200) {
-        notamXML <- xmlParse(xmlUrl)
+        xmlData <- getURLContent(xmlUrl)
+        notamXML <- xmlParse(xmlData)
 
         ## Global identifier
         guid <- xpathSApply(notamXML, "/XNOTAM-Update/Group/Add/Not/NotUid/codeGUID", xmlValue)

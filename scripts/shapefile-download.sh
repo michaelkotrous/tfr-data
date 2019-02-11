@@ -7,7 +7,7 @@ do
     temp_notam="${notam%\"}"
     temp_guid="${temp_guid#\"}"
     temp_notam="${temp_notam#\"}"
-    wget http://tfr.faa.gov/save_pages/$temp_notam.shp.zip -P /tmp/
+    wget https://tfr.faa.gov/save_pages/$temp_notam.shp.zip -P /tmp/
     
     if [ -f "/tmp/$temp_notam.shp.zip" ]; then
         unzip /tmp/$temp_notam.shp.zip -d /home/ec2-user/shapefiles/$temp_guid
@@ -27,7 +27,7 @@ if [ -f "/home/ec2-user/newTFRids-archive.csv" ]; then
         temp_notam="${temp_notam#\"}"
         temp_date="${timestamp%\"}"
         temp_date="${temp_date#\"}"
-        wget http://tfr.faa.gov/save_pages/$temp_notam.shp.zip -P /tmp/
+        wget https://tfr.faa.gov/save_pages/$temp_notam.shp.zip -P /tmp/
     
         if [ -f "/tmp/$temp_notam.shp.zip" ]; then
             unzip /tmp/$temp_notam.shp.zip -d /home/ec2-user/shapefiles/$temp_guid
