@@ -5,6 +5,8 @@ The scripts are written to run on an AWS EC2 Linux instance, so you may need to 
 
 The FAA lists its active TFRs [online](http://tfr.faa.gov/tfr2/list.jsp). Unfortunately no online repository exists for expired TFRs, stymieing analysis of temporary flight restrictions. The data on active TFRs are conveniently formatted in HTML tables, making the data conducive to using the `readHTMLTable` function provided by R's XML package.
 
+[Download my current TFR data](https://www.michaelkotro.us/posts/downloading-faa-tfr-data-e20d56a), collected since Sept. 20, 2017.
+
 ## MIT License
 You are free to copy and modify this code as you see fit to collect your own TFR data. If you find a way to improve the dataset, then please submit a pull request!
 
@@ -40,6 +42,11 @@ I wrote a [blog post](http://www.michaelkotro.us/posts/web-scraping-with-r-amazo
 The FAA posts shapefiles for most TFRs that contain valuable information about the landarea and altitudes affected that R's XML package cannot scrape.
 
 Running the shell script after the R script will loop over the URLs where each active TFRs shapefiles are stored and download them using `wget`. The script in this repo places the shapefiles into directory `/tmp/` and then unpackage the archives in a specified directory.
+
+## Download TFR Data
+You can download my copy of the TFR data and shapefiles at this [webpage](https://www.michaelkotro.us/posts/downloading-faa-tfr-data-e20d56a) on my personal website. My dataset has TFR information and corresponding shapefiles dating back to September 20, 2017.
+
+You can use the files as the starting point for your own scraper or for analysis.
 
 ## Load the Data into R
 ```r
