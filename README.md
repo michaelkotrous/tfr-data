@@ -1,11 +1,11 @@
 # FAA TFR Data
 The code in this project compiles a dataset of temporary flight restrictions issued by the FAA and their corresponding shapefiles.
 
-The scripts are written to run on an AWS EC2 Linux instance, so you may need to fork in order to tweak according to your operating system or production environment. I wrote a [blog post](http://www.michaelkotro.us/posts/web-scraping-with-r-amazon-web-services-7eb5e27) outlining the process of setting up an EC2 instance with R to run these scripts.
+The scripts are written to run on an AWS EC2 Linux instance, so you may need to fork in order to tweak according to your operating system or production environment. I wrote a [blog post](https://www.michaelkotrous.com/data/web-scraping-with-r-amazon-web-services-7eb5e27) outlining the process of setting up an EC2 instance with R to run these scripts.
 
-The FAA lists its active TFRs [online](http://tfr.faa.gov/tfr2/list.jsp). Unfortunately no online repository exists for expired TFRs, stymieing analysis of temporary flight restrictions. The data on active TFRs are conveniently formatted in HTML tables, making the data conducive to using the `readHTMLTable` function provided by R's XML package.
+The FAA lists its active TFRs [online](https://tfr.faa.gov/tfr2/list.jsp). Unfortunately no online repository exists for expired TFRs, stymieing analysis of temporary flight restrictions. The data on active TFRs are conveniently formatted in HTML tables, making the data conducive to using the `readHTMLTable` function provided by R's XML package.
 
-[Download my current TFR data](https://www.michaelkotro.us/posts/downloading-faa-tfr-data-e20d56a), collected since Sept. 20, 2017.
+[Download my current TFR data](https://www.michaelkotrous.com/data/downloading-faa-tfr-data-e20d56a), collected since Sept. 20, 2017.
 
 ## MIT License
 You are free to copy and modify this code as you see fit to collect your own TFR data. If you find a way to improve the dataset, then please submit a pull request!
@@ -15,7 +15,7 @@ You are free to copy and modify this code as you see fit to collect your own TFR
 * R's `XML` package ([R Documentation](https://cran.r-project.org/package=XML)),
 * R's `RCurl` package ([R Documentation](https://cran.r-project.org/web/packages/RCurl/index.html))
 * R's `httr` package ([GitHub](https://github.com/r-lib/httr)),
-* `wget`(Install with [Homebrew](http://formulae.brew.sh/formula/wget) if running on Mac OS), and
+* `wget`(Install with [Homebrew](https://formulae.brew.sh/formula/wget) if running on Mac OS), and
 * `sed`.
 
 ## Preparing the Scripts and Files to Avoid Errors
@@ -36,7 +36,7 @@ These scripts are designed to be run automatically with no need to oversee their
 0 * * * * R CMD BATCH /home/ec2-user/scripts/FAA-TFR-scraper.R && /home/ec2-user/scripts/shapefile-download.sh
 ```
 
-I wrote a [blog post](http://www.michaelkotro.us/posts/web-scraping-with-r-amazon-web-services-7eb5e27) outlining the process of setting up an EC2 instance to execute the web scrapes and store your data in an S3 bucket. If you do not have an AWS account currently, you can sign up and run an EC2 instance under the "free tier" for 12 months. You can collect TFR data for a year free of charge!
+I wrote a [blog post](https://www.michaelkotrous.com/data/web-scraping-with-r-amazon-web-services-7eb5e27) outlining the process of setting up an EC2 instance to execute the web scrapes and store your data in an S3 bucket. If you do not have an AWS account currently, you can sign up and run an EC2 instance under the "free tier" for 12 months. You can collect TFR data for a year free of charge!
 
 ### Why do I need the Shell script?
 The FAA posts shapefiles for most TFRs that contain valuable information about the landarea and altitudes affected that R's XML package cannot scrape.
@@ -44,7 +44,7 @@ The FAA posts shapefiles for most TFRs that contain valuable information about t
 Running the shell script after the R script will loop over the URLs where each active TFRs shapefiles are stored and download them using `wget`. The script in this repo places the shapefiles into directory `/tmp/` and then unpackage the archives in a specified directory.
 
 ## Download TFR Data
-You can download my copy of the TFR data and shapefiles at this [webpage](https://www.michaelkotro.us/posts/downloading-faa-tfr-data-e20d56a) on my personal website. My dataset has TFR information and corresponding shapefiles dating back to September 20, 2017.
+You can download my copy of the TFR data and shapefiles at this [webpage](https://www.michaelkotrous.com/data/downloading-faa-tfr-data-e20d56a) on my personal website. My dataset has TFR information and corresponding shapefiles dating back to September 20, 2017.
 
 You can use the files as the starting point for your own scraper or for analysis.
 
