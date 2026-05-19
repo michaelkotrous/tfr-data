@@ -36,7 +36,7 @@ These scripts are designed to be run automatically with no need to oversee their
 0 * * * * R CMD BATCH /home/ec2-user/scripts/FAA-TFR-scraper.R && /home/ec2-user/scripts/shapefile-download.sh
 ```
 
-I wrote a [blog post](https://www.michaelkotrous.com/data/web-scraping-with-r-amazon-web-services-7eb5e27) outlining the process of setting up an EC2 instance to execute the web scrapes and store your data in an S3 bucket. If you do not have an AWS account currently, you can sign up and run an EC2 instance under the "free tier" for 12 months. You can collect TFR data for a year free of charge!
+I wrote a [blog post](https://www.michaelkotrous.com/post/web-scraping-with-r-amazon-web-services/) outlining the process of setting up an EC2 instance to execute the web scrapes and store your data in an S3 bucket. If you do not have an AWS account currently, you can sign up and run an EC2 instance under the "free tier" for 12 months. You can collect TFR data for a year free of charge!
 
 ### Why do I need the Shell script?
 The FAA posts shapefiles for most TFRs that contain valuable information about the landarea and altitudes affected that R's XML package cannot scrape.
